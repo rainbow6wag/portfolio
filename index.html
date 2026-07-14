@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Марик</title>
+  </head>
+  <body>
+    <header>
+      <a href="#">Marik</a>
+      <nav>
+        <a href="#hero-section">Главная</a>
+        <a href="#about-section">Обо мне</a>
+        <a href="#footer">Контакты</a>
+      </nav>
+    </header>
+    <section class="hero-section" id="hero-section">
+      <!-- hero section -->
+      <h1 class="hero-title">Привет я марик</h1>
+      <p class="preview">Веб дизайнер и фронтендер</p>
+      <time>9.07.2026</time>
+    </section>
+    <!-- end hero section -->
+    <section class="about-section" id="about-section">
+      <h2>Обо мне</h2>
+      <p>Родился в 2004 в Украине</p>
+      <h2>Мои увлечения</h2>
+      <ol class="list hobbies">
+        <li>Секс</li>
+        <li>Колеса</li>
+        <li>Шора</li>
+      </ol>
+      <a class="button" href="https://t.me/rainbl0w">Получить консультацию</a>
+    </section>
+    <section class="skills-section">
+      <h2>Мои навыки</h2>
+      <ul class="list skills">
+        <li>Figma</li>
+        <li>Tilda</li>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>AI</li>
+      </ul>
+    </section>
+    <section class="faq-section">
+      <h2>FAQ</h2>
+      <h3>Почему стоит работать со мной?</h3>
+      <p>Потому что я крутой</p>
+      <h3>Какова ваша выгода от сотрудничества со мной</h3>
+      <p>Ебать кайфик понял</p>
+    </section>
+    <section class="works-section">
+      <h2>Мои работы</h2>
+      <div class="works">
+        <img
+          src="https://i.pinimg.com/736x/09/5c/20/095c204d1e48361a493e6b004952dd7b.jpg"
+          alt="Work 1"
+        />
+        <img
+          src="https://i.pinimg.com/736x/8f/9e/57/8f9e574e82b7acfa0a11e56a255f8c9a.jpg"
+          alt="Work 2"
+        />
+        <img
+          src="https://i.pinimg.com/736x/b6/eb/3c/b6eb3c9b399d868806263e55effcd2de.jpg"
+          alt="Work 3"
+        />
+      </div>
+    </section>
+    <section class="cards-section">
+      <h2>Мои карточки</h2>
+      <div class="cards">
+        <div class="card">
+          <span class="badge">TOP</span>
+          <h3>Frontend</h3>
+          <p>HTML CSS JS REACT</p>
+        </div>
+        <div class="card">
+          <span class="badge">TOP</span>
+          <h3>UI/UX DESIGN</h3>
+          <p>Figma Sketch Adobe XD</p>
+        </div>
+        <div class="card">
+          <span class="badge">TOP</span>
+          <h3>CMS</h3>
+          <p>Tilda Webflow Framer Wordpress</p>
+        </div>
+      </div>
+    </section>
+    <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
+    <script>
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function scrollToBottom() {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    </script>
+    <a class="contactme" href="https://t.me/rainbl0w">Написать</a>
+    <footer id="footer">
+      <a href="tel:+79999999999">Связаться со мной</a>
+      <!-- <img
+        class="vk-logo"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/VK_Compact_Logo_%282021-present%29.svg/250px-VK_Compact_Logo_%282021-present%29.svg.png"
+        alt="VK Logo"
+        width="40"
+        height="40"
+      /> -->
+      <a class="vk-link" href="https://vk.com/kievskiytrue">Я в вк</a>
+      <h2 class="copyright">MARIK</h2>
+    </footer>
+  </body>
+</html>
