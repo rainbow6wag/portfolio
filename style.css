@@ -21,6 +21,7 @@ section {
 }
 header {
   background-color: #ffffff41;
+  backdrop-filter: blur(10px);
   font-weight: 700;
   padding: 10px 0px;
   border-radius: 12px;
@@ -61,7 +62,7 @@ a {
 }
 .list li {
   padding-left: 0px;
-  color: chartreuse;
+  color: #fff;
 }
 .hero-title {
   font-size: 48px;
@@ -86,6 +87,7 @@ time {
 }
 .button {
   background-color: black;
+  color: chartreuse;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -131,6 +133,7 @@ nav {
 }
 .skills li {
   background-color: #222;
+  text-shadow: 0px 0px 8px chartreuse;
   padding: 10px 20px;
   border-radius: 8px;
 }
@@ -152,7 +155,7 @@ nav {
   width: 100%;
 }
 .card {
-  flex: 1;
+  flex: 1 1 280px;
   position: relative;
   background-color: #222;
   padding: 20px;

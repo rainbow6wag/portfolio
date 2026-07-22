@@ -1,0 +1,1716 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Гавань — личный кабинет</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #10202e;
+        --ink-2: #1b3245;
+        --paper: #f6f3ec;
+        --card: #ffffff;
+        --line: #e3ddcc;
+        --line-strong: #cfc6ac;
+        --brass: #a8823c;
+        --brass-dark: #7c5f28;
+        --slate: #5b6b78;
+        --slate-light: #8b98a2;
+        --forest: #35604b;
+        --forest-bg: #e7efe7;
+        --rust: #9c4a3b;
+        --rust-bg: #f3e6e2;
+        --font-display: "Fraunces", serif;
+        --font-body: "IBM Plex Sans", sans-serif;
+        --font-mono: "IBM Plex Mono", monospace;
+        --radius: 10px;
+        --radius-lg: 16px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--font-body);
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+      }
+      button {
+        font-family: inherit;
+      }
+      :focus-visible {
+        outline: 2px solid var(--brass);
+        outline-offset: 2px;
+      }
+
+      .app {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* ===== SIDEBAR ===== */
+      .sidebar {
+        width: 232px;
+        flex-shrink: 0;
+        background: var(--ink);
+        color: #ede6d6;
+        display: flex;
+        flex-direction: column;
+        padding: 22px 16px;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 6px 22px;
+        border-bottom: 1px solid rgba(237, 230, 214, 0.14);
+        margin-bottom: 18px;
+      }
+      .brand-mark {
+        width: 30px;
+        height: 30px;
+        flex-shrink: 0;
+      }
+      .brand-name {
+        font-family: var(--font-display);
+        font-size: 19px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+      .nav {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        flex: 1;
+      }
+      .nav-item {
+        margin-bottom: 2px;
+      }
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        color: #c9c2ae;
+        text-decoration: none;
+        font-size: 13.5px;
+        cursor: pointer;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+      }
+      .nav-link svg {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+        opacity: 0.85;
+      }
+      .nav-link:hover {
+        background: rgba(237, 230, 214, 0.07);
+        color: #ede6d6;
+      }
+      .nav-link.active {
+        background: rgba(168, 130, 60, 0.18);
+        color: #f3d9a4;
+      }
+      .nav-link.active svg {
+        opacity: 1;
+      }
+      .sidebar-foot {
+        border-top: 1px solid rgba(237, 230, 214, 0.14);
+        padding-top: 14px;
+        margin-top: 10px;
+      }
+      .profile-mini {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px;
+      }
+      .avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--brass);
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+      .profile-mini-name {
+        font-size: 13px;
+        font-weight: 500;
+        color: #ede6d6;
+      }
+      .profile-mini-role {
+        font-size: 11.5px;
+        color: #9c9686;
+      }
+
+      /* ===== MAIN ===== */
+      .main {
+        flex: 1;
+        min-width: 0;
+        padding: 26px 34px 60px;
+      }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 26px;
+        gap: 20px;
+      }
+      .greeting h1 {
+        font-family: var(--font-display);
+        font-size: 23px;
+        font-weight: 600;
+        margin: 0 0 3px;
+      }
+      .greeting p {
+        margin: 0;
+        color: var(--slate);
+        font-size: 13px;
+      }
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .icon-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid var(--line-strong);
+        background: var(--card);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+        color: var(--ink);
+      }
+      .icon-btn:hover {
+        border-color: var(--brass);
+      }
+      .icon-btn svg {
+        width: 17px;
+        height: 17px;
+      }
+      .badge-dot {
+        position: absolute;
+        top: 6px;
+        right: 7px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--rust);
+        border: 1.5px solid var(--card);
+      }
+      .search-box {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--card);
+        border: 1px solid var(--line-strong);
+        border-radius: 20px;
+        padding: 0 14px;
+        height: 38px;
+        width: 220px;
+      }
+      .search-box svg {
+        width: 15px;
+        height: 15px;
+        color: var(--slate-light);
+        flex-shrink: 0;
+      }
+      .search-box input {
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 13px;
+        width: 100%;
+        color: var(--ink);
+        font-family: var(--font-body);
+      }
+
+      .view {
+        display: none;
+      }
+      .view.active {
+        display: block;
+      }
+
+      /* ===== HERO / PASSBOOK CARD ===== */
+      .hero {
+        background: var(--ink);
+        border-radius: var(--radius-lg);
+        padding: 26px 30px;
+        color: #ede6d6;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 22px;
+        border-left: 4px dashed rgba(168, 130, 60, 0.55);
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        left: -1px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+      }
+      .account-tabs {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      .account-tab {
+        padding: 7px 14px;
+        border-radius: 20px;
+        border: 1px solid rgba(237, 230, 214, 0.22);
+        background: none;
+        color: #c9c2ae;
+        font-size: 12.5px;
+        cursor: pointer;
+      }
+      .account-tab.active {
+        background: #ede6d6;
+        color: var(--ink);
+        border-color: #ede6d6;
+        font-weight: 500;
+      }
+      .hero-body {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+      .hero-label {
+        font-size: 12px;
+        color: #b8af98;
+        margin: 0 0 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .hero-balance {
+        font-family: var(--font-display);
+        font-size: 40px;
+        font-weight: 500;
+        margin: 0;
+        letter-spacing: -0.5px;
+      }
+      .hero-sub {
+        font-size: 12.5px;
+        color: #b8af98;
+        margin-top: 6px;
+        font-family: var(--font-mono);
+      }
+      .hero-meta {
+        text-align: right;
+        font-size: 12.5px;
+        color: #b8af98;
+      }
+      .hero-meta strong {
+        display: block;
+        color: #ede6d6;
+        font-size: 14px;
+        font-weight: 500;
+        font-family: var(--font-mono);
+        margin-bottom: 2px;
+      }
+
+      /* ===== QUICK ACTIONS ===== */
+      .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .qa-btn {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 14px 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        cursor: pointer;
+        text-align: left;
+      }
+      .qa-btn:hover {
+        border-color: var(--brass);
+        box-shadow: 0 1px 0 var(--brass);
+      }
+      .qa-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: var(--forest-bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--forest);
+      }
+      .qa-btn:nth-child(2) .qa-icon {
+        background: #efe6d2;
+        color: var(--brass-dark);
+      }
+      .qa-btn:nth-child(3) .qa-icon {
+        background: var(--rust-bg);
+        color: var(--rust);
+      }
+      .qa-btn:nth-child(4) .qa-icon {
+        background: #e7eaf0;
+        color: var(--slate);
+      }
+      .qa-icon svg {
+        width: 16px;
+        height: 16px;
+      }
+      .qa-label {
+        font-size: 13px;
+        font-weight: 500;
+      }
+
+      /* ===== CONTENT GRID ===== */
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1.55fr 1fr;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .panel {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        padding: 20px 22px;
+      }
+      .panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .panel-title {
+        font-family: var(--font-display);
+        font-size: 16.5px;
+        font-weight: 600;
+        margin: 0;
+      }
+      .filter-chips {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        border: 1px solid var(--line-strong);
+        background: none;
+        border-radius: 14px;
+        padding: 5px 12px;
+        font-size: 12px;
+        color: var(--slate);
+        cursor: pointer;
+      }
+      .chip.active {
+        background: var(--ink);
+        color: #ede6d6;
+        border-color: var(--ink);
+      }
+
+      /* ===== LEDGER ===== */
+      .ledger {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .ledger-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .ledger-row:last-child {
+        border-bottom: none;
+      }
+      .ledger-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .ledger-icon svg {
+        width: 16px;
+        height: 16px;
+      }
+      .ledger-main {
+        flex: 1;
+        min-width: 0;
+      }
+      .ledger-title {
+        font-size: 13.5px;
+        font-weight: 500;
+        margin: 0 0 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .ledger-date {
+        font-size: 11.5px;
+        color: var(--slate-light);
+        font-family: var(--font-mono);
+      }
+      .ledger-leader {
+        flex: 1;
+        border-bottom: 1px dotted var(--line-strong);
+        margin: 0 4px;
+        min-width: 20px;
+        height: 0;
+        align-self: center;
+        margin-top: 14px;
+      }
+      .ledger-amounts {
+        text-align: right;
+        flex-shrink: 0;
+      }
+      .ledger-amount {
+        font-family: var(--font-mono);
+        font-size: 13.5px;
+        font-weight: 500;
+      }
+      .ledger-amount.pos {
+        color: var(--forest);
+      }
+      .ledger-amount.neg {
+        color: var(--ink);
+      }
+      .ledger-balance {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--slate-light);
+        margin-top: 1px;
+      }
+      .empty-ledger {
+        padding: 30px 10px;
+        text-align: center;
+        color: var(--slate);
+        font-size: 13px;
+      }
+
+      /* ===== SIDE COLUMN ===== */
+      .side-col {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .donut-wrap {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .donut {
+        width: 104px;
+        height: 104px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        position: relative;
+      }
+      .donut::after {
+        content: "";
+        position: absolute;
+        inset: 16px;
+        border-radius: 50%;
+        background: var(--card);
+      }
+      .donut-center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        z-index: 1;
+      }
+      .donut-center strong {
+        font-family: var(--font-mono);
+        font-size: 13px;
+      }
+      .donut-center span {
+        font-size: 10px;
+        color: var(--slate-light);
+      }
+      .legend {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        flex: 1;
+      }
+      .legend li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        margin-bottom: 7px;
+        color: var(--slate);
+      }
+      .legend li:last-child {
+        margin-bottom: 0;
+      }
+      .legend-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+      .legend-val {
+        margin-left: auto;
+        font-family: var(--font-mono);
+        color: var(--ink);
+        font-weight: 500;
+      }
+
+      .goal-progress {
+        background: var(--line);
+        border-radius: 6px;
+        height: 8px;
+        overflow: hidden;
+        margin: 10px 0 8px;
+      }
+      .goal-progress-fill {
+        height: 100%;
+        background: var(--brass);
+        border-radius: 6px;
+      }
+      .goal-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--slate);
+      }
+      .goal-row strong {
+        color: var(--ink);
+        font-family: var(--font-mono);
+        font-weight: 500;
+      }
+
+      .physical-card {
+        background: var(--ink-2);
+        border-radius: 14px;
+        padding: 18px;
+        color: #ede6d6;
+        position: relative;
+        overflow: hidden;
+        background-image: repeating-linear-gradient(
+          115deg,
+          rgba(255, 255, 255, 0.025) 0 2px,
+          transparent 2px 10px
+        );
+      }
+      .physical-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 30px;
+      }
+      .physical-card-bank {
+        font-family: var(--font-display);
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .chip-graphic {
+        width: 30px;
+        height: 22px;
+        border-radius: 4px;
+        background: linear-gradient(135deg, #c9a45e, var(--brass-dark));
+      }
+      .physical-card-number {
+        font-family: var(--font-mono);
+        font-size: 14.5px;
+        letter-spacing: 2px;
+        margin-bottom: 14px;
+      }
+      .physical-card-bottom {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10.5px;
+        color: #b8af98;
+      }
+      .physical-card-bottom strong {
+        display: block;
+        color: #ede6d6;
+        font-size: 12px;
+        font-family: var(--font-mono);
+        margin-top: 2px;
+      }
+
+      /* ===== PLACEHOLDER VIEW ===== */
+      .placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 80px 20px;
+        border: 1px dashed var(--line-strong);
+        border-radius: var(--radius-lg);
+        color: var(--slate);
+      }
+      .placeholder svg {
+        width: 34px;
+        height: 34px;
+        margin-bottom: 14px;
+        color: var(--brass);
+      }
+      .placeholder h2 {
+        font-family: var(--font-display);
+        font-size: 18px;
+        color: var(--ink);
+        margin: 0 0 6px;
+      }
+      .placeholder p {
+        margin: 0 0 16px;
+        font-size: 13px;
+        max-width: 320px;
+      }
+      .placeholder button {
+        background: var(--ink);
+        color: #ede6d6;
+        border: none;
+        padding: 9px 18px;
+        border-radius: 8px;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      /* ===== MODAL ===== */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(16, 32, 46, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 50;
+        padding: 20px;
+      }
+      .modal-overlay[hidden] {
+        display: none;
+      }
+      .modal {
+        background: var(--card);
+        border-radius: var(--radius-lg);
+        width: 100%;
+        max-width: 400px;
+        padding: 24px 26px;
+        position: relative;
+      }
+      .modal h3 {
+        font-family: var(--font-display);
+        font-size: 18px;
+        margin: 0 0 4px;
+      }
+      .modal p.sub {
+        margin: 0 0 18px;
+        color: var(--slate);
+        font-size: 12.5px;
+      }
+      .field {
+        margin-bottom: 14px;
+      }
+      .field label {
+        display: block;
+        font-size: 12px;
+        color: var(--slate);
+        margin-bottom: 5px;
+      }
+      .field input,
+      .field select {
+        width: 100%;
+        padding: 9px 11px;
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        font-size: 13.5px;
+        font-family: var(--font-body);
+        background: var(--paper);
+        color: var(--ink);
+      }
+      .field input:focus,
+      .field select:focus {
+        border-color: var(--brass);
+      }
+      .modal-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .btn-primary {
+        flex: 1;
+        background: var(--ink);
+        color: #ede6d6;
+        border: none;
+        padding: 11px;
+        border-radius: 8px;
+        font-size: 13.5px;
+        cursor: pointer;
+        font-weight: 500;
+      }
+      .btn-secondary {
+        flex: 1;
+        background: none;
+        color: var(--ink);
+        border: 1px solid var(--line-strong);
+        padding: 11px;
+        border-radius: 8px;
+        font-size: 13.5px;
+        cursor: pointer;
+      }
+      .modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--slate-light);
+        padding: 4px;
+      }
+      .modal-close svg {
+        width: 16px;
+        height: 16px;
+      }
+      .success-note {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        background: var(--forest-bg);
+        color: var(--forest);
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 12.5px;
+        margin-top: 4px;
+      }
+      .success-note svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      /* ===== BOTTOM NAV (mobile) ===== */
+      .bottom-nav {
+        display: none;
+      }
+
+      @media (max-width: 880px) {
+        .sidebar {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          top: auto;
+          width: 100%;
+          height: auto;
+          flex-direction: row;
+          padding: 8px 10px;
+          z-index: 40;
+          border-top: 1px solid rgba(237, 230, 214, 0.14);
+          justify-content: space-around;
+        }
+        .brand,
+        .sidebar-foot {
+          display: none;
+        }
+        .nav {
+          display: flex;
+          flex: none;
+          width: 100%;
+          justify-content: space-around;
+        }
+        .nav-item {
+          margin: 0;
+        }
+        .nav-link {
+          flex-direction: column;
+          gap: 4px;
+          font-size: 10px;
+          padding: 6px 10px;
+        }
+        .main {
+          padding: 18px 16px 90px;
+        }
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .quick-actions {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .hero-body {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .hero-meta {
+          text-align: left;
+        }
+        .search-box {
+          width: 150px;
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .qa-btn,
+        .icon-btn,
+        .nav-link,
+        .account-tab,
+        .chip {
+          transition:
+            background-color 0.15s ease,
+            border-color 0.15s ease;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <svg
+            class="brand-mark"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M4 20 Q16 28 28 20"
+              stroke="#A8823C"
+              stroke-width="2"
+              fill="none"
+            />
+            <path d="M16 4 V17" stroke="#EDE6D6" stroke-width="2" />
+            <path d="M16 6 L23 9 L16 12 Z" fill="#A8823C" />
+            <circle cx="16" cy="20" r="1.6" fill="#EDE6D6" />
+          </svg>
+          <span class="brand-name">Гавань</span>
+        </div>
+        <ul class="nav">
+          <li class="nav-item">
+            <button class="nav-link active" data-view="overview">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <rect x="3" y="3" width="8" height="8" rx="1.5" />
+                <rect x="13" y="3" width="8" height="5" rx="1.5" />
+                <rect x="13" y="12" width="8" height="9" rx="1.5" />
+                <rect x="3" y="15" width="8" height="6" rx="1.5" />
+              </svg>
+              Обзор
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link"
+              data-view="placeholder"
+              data-title="Счета"
+              data-text="Здесь появится подробная информация по каждому счёту и вкладу."
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <rect x="3" y="6" width="18" height="13" rx="2" />
+                <path d="M3 10h18" />
+              </svg>
+              Счета
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link"
+              data-view="placeholder"
+              data-title="Переводы"
+              data-text="Здесь можно будет посмотреть шаблоны и историю переводов."
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <path d="M4 8h13M13 4l4 4-4 4" />
+                <path d="M20 16H7m4 4-4-4 4-4" />
+              </svg>
+              Переводы
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link"
+              data-view="placeholder"
+              data-title="Карты"
+              data-text="Здесь будут все ваши карты и настройки лимитов."
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <rect x="2" y="5" width="20" height="14" rx="2.2" />
+                <path d="M2 10h20" />
+              </svg>
+              Карты
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link"
+              data-view="placeholder"
+              data-title="История"
+              data-text="Полная история операций по всем счетам появится здесь."
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 3" />
+              </svg>
+              История
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link"
+              data-view="placeholder"
+              data-title="Настройки"
+              data-text="Настройки профиля, безопасности и уведомлений появятся здесь."
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.5-2-3.4-2.3.9a7.6 7.6 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.6 7.6 0 0 0-1.7 1l-2.3-.9-2 3.4L6.6 11a7.6 7.6 0 0 0 0 2l-2 1.5 2 3.4 2.3-.9c.5.4 1.1.8 1.7 1l.4 2.5h4l.4-2.5c.6-.2 1.2-.6 1.7-1l2.3.9 2-3.4z"
+                />
+              </svg>
+              Настройки
+            </button>
+          </li>
+        </ul>
+        <div class="sidebar-foot">
+          <div class="profile-mini">
+            <div class="avatar">ИК</div>
+            <div>
+              <div class="profile-mini-name">Илья Крылов</div>
+              <div class="profile-mini-role">Клиент с 2019</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div class="greeting">
+            <h1>Добрый день, Илья</h1>
+            <p id="today-date"></p>
+          </div>
+          <div class="topbar-actions">
+            <div class="search-box">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              <input id="tx-search" type="text" placeholder="Найти операцию" />
+            </div>
+            <button class="icon-btn" aria-label="Уведомления">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+              >
+                <path d="M6 8a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6" />
+                <path d="M10 20a2 2 0 0 0 4 0" />
+              </svg>
+              <span class="badge-dot"></span>
+            </button>
+            <button
+              class="icon-btn"
+              id="btn-new-transfer"
+              aria-label="Новый перевод"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <section id="view-overview" class="view active">
+          <div class="hero">
+            <div class="account-tabs" id="account-tabs"></div>
+            <div class="hero-body">
+              <div>
+                <p class="hero-label">Доступный баланс</p>
+                <p class="hero-balance" id="hero-balance">0 ₽</p>
+                <p class="hero-sub" id="hero-account-number">•• 0000</p>
+              </div>
+              <div class="hero-meta" id="hero-meta"></div>
+            </div>
+          </div>
+
+          <div class="quick-actions">
+            <button class="qa-btn" data-action="transfer">
+              <span class="qa-icon"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M7 7h10M13 3l4 4-4 4" />
+                  <path d="M17 17H7m4 4-4-4 4-4" /></svg
+              ></span>
+              <span class="qa-label">Перевести</span>
+            </button>
+            <button class="qa-btn" data-action="topup">
+              <span class="qa-icon"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M12 5v14M5 12h14" /></svg
+              ></span>
+              <span class="qa-label">Пополнить</span>
+            </button>
+            <button class="qa-btn" data-action="pay">
+              <span class="qa-icon"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M3 10h18M6 15h4" />
+                  <rect x="3" y="5" width="18" height="14" rx="2" /></svg
+              ></span>
+              <span class="qa-label">Оплатить ЖКХ</span>
+            </button>
+            <button class="qa-btn" data-action="more">
+              <span class="qa-icon"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <circle cx="5" cy="12" r="1.4" />
+                  <circle cx="12" cy="12" r="1.4" />
+                  <circle cx="19" cy="12" r="1.4" /></svg
+              ></span>
+              <span class="qa-label">Ещё</span>
+            </button>
+          </div>
+
+          <div class="content-grid">
+            <div class="panel">
+              <div class="panel-head">
+                <p class="panel-title">Последние операции</p>
+                <div class="filter-chips" id="filter-chips">
+                  <button class="chip active" data-filter="all">Все</button>
+                  <button class="chip" data-filter="income">Доходы</button>
+                  <button class="chip" data-filter="expense">Покупки</button>
+                  <button class="chip" data-filter="transfer">Переводы</button>
+                </div>
+              </div>
+              <ul class="ledger" id="ledger-list"></ul>
+            </div>
+
+            <div class="side-col">
+              <div class="panel">
+                <p class="panel-title" style="margin-bottom: 14px">
+                  Расходы за месяц
+                </p>
+                <div class="donut-wrap">
+                  <div class="donut" id="spend-donut">
+                    <div class="donut-center">
+                      <strong id="spend-total"></strong><span>всего</span>
+                    </div>
+                  </div>
+                  <ul class="legend" id="spend-legend"></ul>
+                </div>
+              </div>
+
+              <div class="panel">
+                <p class="panel-title" style="margin-bottom: 4px">
+                  Цель «Черногория»
+                </p>
+                <div class="goal-progress">
+                  <div class="goal-progress-fill" id="goal-fill"></div>
+                </div>
+                <div class="goal-row">
+                  <span id="goal-current"></span
+                  ><strong id="goal-percent"></strong>
+                </div>
+              </div>
+
+              <div class="physical-card">
+                <div class="physical-card-top">
+                  <span class="physical-card-bank">Гавань</span>
+                  <span class="chip-graphic" aria-hidden="true"></span>
+                </div>
+                <div class="physical-card-number">•••• •••• •••• 1153</div>
+                <div class="physical-card-bottom">
+                  <div>Держатель<strong>И. КРЫЛОВ</strong></div>
+                  <div>Действует до<strong>08/29</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-placeholder" class="view">
+          <div class="placeholder">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+            >
+              <path d="M4 20 Q12 26 20 20" />
+              <path d="M12 4v13" />
+              <path d="M12 6l6 3-6 3" />
+            </svg>
+            <h2 id="ph-title">Раздел в разработке</h2>
+            <p id="ph-text">Этот раздел скоро появится.</p>
+            <button data-back>Вернуться к обзору</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay" hidden>
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
+        <button class="modal-close" id="modal-close" aria-label="Закрыть">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M6 6l12 12M18 6 6 18" />
+          </svg>
+        </button>
+        <h3 id="modal-title">Перевести</h3>
+        <p class="sub">Со счёта, открытого сейчас на обзоре</p>
+        <form id="transfer-form">
+          <div class="field">
+            <label for="tf-recipient">Получатель</label>
+            <input
+              id="tf-recipient"
+              type="text"
+              placeholder="Имя или номер телефона"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="tf-amount">Сумма</label>
+            <input
+              id="tf-amount"
+              type="number"
+              min="1"
+              step="1"
+              placeholder="0"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="tf-comment">Комментарий</label>
+            <input id="tf-comment" type="text" placeholder="Необязательно" />
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn-secondary" id="modal-cancel">
+              Отмена
+            </button>
+            <button type="submit" class="btn-primary">Перевести</button>
+          </div>
+          <div class="success-note" id="tf-success" hidden>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+            <span>Перевод выполнен и добавлен в операции.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        /* ============ DATA LAYER ============ */
+        const CATEGORY_META = {
+          income: { label: "Доход", color: "#35604B", bg: "#E7EFE7" },
+          food: { label: "Продукты", color: "#7C5F28", bg: "#EFE6D2" },
+          transport: { label: "Транспорт", color: "#5B6B78", bg: "#E7EAF0" },
+          utility: { label: "ЖКХ", color: "#9C4A3B", bg: "#F3E6E2" },
+          cafe: { label: "Кафе", color: "#A8823C", bg: "#F3E9D2" },
+          transfer: { label: "Перевод", color: "#10202E", bg: "#E7E5DE" },
+        };
+
+        const accounts = [
+          {
+            id: "checking",
+            name: "Текущий счёт",
+            number: "4821",
+            balance: 184320.5,
+            transactions: [
+              {
+                id: 1,
+                date: "21 июля",
+                title: "Зарплата",
+                category: "income",
+                amount: 145000,
+                balanceAfter: 184320.5,
+              },
+              {
+                id: 2,
+                date: "20 июля",
+                title: "Перекрёсток",
+                category: "food",
+                amount: -3240.2,
+                balanceAfter: 39320.5,
+              },
+              {
+                id: 3,
+                date: "19 июля",
+                title: "Перевод — Анна С.",
+                category: "transfer",
+                amount: -8000,
+                balanceAfter: 42560.7,
+              },
+              {
+                id: 4,
+                date: "18 июля",
+                title: "Кофейня «Зерно»",
+                category: "cafe",
+                amount: -420,
+                balanceAfter: 50560.7,
+              },
+              {
+                id: 5,
+                date: "16 июля",
+                title: "Яндекс.Такси",
+                category: "transport",
+                amount: -680,
+                balanceAfter: 50980.7,
+              },
+              {
+                id: 6,
+                date: "14 июля",
+                title: "Оплата ЖКХ",
+                category: "utility",
+                amount: -6120.4,
+                balanceAfter: 51660.7,
+              },
+              {
+                id: 7,
+                date: "11 июля",
+                title: "Перевод от Марка",
+                category: "income",
+                amount: 15000,
+                balanceAfter: 57781.1,
+              },
+            ],
+          },
+          {
+            id: "savings",
+            name: "Накопительный «Отпуск»",
+            number: "9207",
+            balance: 96400.0,
+            transactions: [
+              {
+                id: 8,
+                date: "15 июля",
+                title: "Пополнение",
+                category: "income",
+                amount: 20000,
+                balanceAfter: 96400.0,
+              },
+              {
+                id: 9,
+                date: "01 июля",
+                title: "Пополнение",
+                category: "income",
+                amount: 15000,
+                balanceAfter: 76400.0,
+              },
+            ],
+          },
+          {
+            id: "credit",
+            name: "Кредитная карта",
+            number: "1153",
+            balance: -12850.0,
+            transactions: [
+              {
+                id: 10,
+                date: "20 июля",
+                title: "OZON",
+                category: "food",
+                amount: -4200,
+                balanceAfter: -12850.0,
+              },
+              {
+                id: 11,
+                date: "17 июля",
+                title: "АЗС Лукойл",
+                category: "transport",
+                amount: -2600,
+                balanceAfter: -8650.0,
+              },
+              {
+                id: 12,
+                date: "12 июля",
+                title: "Погашение задолженности",
+                category: "transfer",
+                amount: 6000,
+                balanceAfter: -6050.0,
+              },
+            ],
+          },
+        ];
+
+        const spendCategories = [
+          { key: "food", amount: 7440 },
+          { key: "transport", amount: 3280 },
+          { key: "utility", amount: 6120 },
+          { key: "cafe", amount: 1860 },
+        ];
+
+        const goal = { current: 96400, target: 250000 };
+
+        /* ============ STATE ============ */
+        const state = { accountId: "checking", filter: "all", search: "" };
+
+        /* ============ FORMATTERS ============ */
+        const money = (n) =>
+          new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 0 }).format(
+            Math.round(n),
+          ) + " ₽";
+        const moneySigned = (n) => (n > 0 ? "+" : "") + money(n);
+
+        /* ============ RENDER ============ */
+        function currentAccount() {
+          return accounts.find((a) => a.id === state.accountId);
+        }
+
+        function renderTabs() {
+          const wrap = document.getElementById("account-tabs");
+          wrap.innerHTML = accounts
+            .map(
+              (a) =>
+                `<button class="account-tab ${a.id === state.accountId ? "active" : ""}" data-account="${a.id}">${a.name}</button>`,
+            )
+            .join("");
+        }
+
+        function renderHero() {
+          const acc = currentAccount();
+          document.getElementById("hero-balance").textContent = money(
+            acc.balance,
+          );
+          document.getElementById("hero-account-number").textContent =
+            "•• " + acc.number;
+          document.getElementById("hero-meta").innerHTML =
+            acc.id === "credit"
+              ? `Кредитный лимит<strong>150 000 ₽</strong>`
+              : `Операций в этом месяце<strong>${acc.transactions.length}</strong>`;
+        }
+
+        function renderLedger() {
+          const acc = currentAccount();
+          let items = acc.transactions;
+          if (state.filter === "income")
+            items = items.filter(
+              (t) => t.amount > 0 && t.category !== "transfer",
+            );
+          if (state.filter === "expense")
+            items = items.filter(
+              (t) => t.amount < 0 && t.category !== "transfer",
+            );
+          if (state.filter === "transfer")
+            items = items.filter((t) => t.category === "transfer");
+          if (state.search)
+            items = items.filter((t) =>
+              t.title.toLowerCase().includes(state.search),
+            );
+
+          const list = document.getElementById("ledger-list");
+          if (items.length === 0) {
+            list.innerHTML =
+              '<li class="empty-ledger">Ничего не найдено. Попробуйте другой фильтр или запрос.</li>';
+            return;
+          }
+          list.innerHTML = items
+            .map((t) => {
+              const meta = CATEGORY_META[t.category];
+              return `<li class="ledger-row">
+        <span class="ledger-icon" style="background:${meta.bg}; color:${meta.color}">${categoryIcon(t.category)}</span>
+        <span class="ledger-main">
+          <p class="ledger-title">${t.title}</p>
+          <span class="ledger-date">${t.date}</span>
+        </span>
+        <span class="ledger-leader"></span>
+        <span class="ledger-amounts">
+          <div class="ledger-amount ${t.amount > 0 ? "pos" : "neg"}">${moneySigned(t.amount)}</div>
+          <div class="ledger-balance">ост. ${money(t.balanceAfter)}</div>
+        </span>
+      </li>`;
+            })
+            .join("");
+        }
+
+        function categoryIcon(cat) {
+          const icons = {
+            income:
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
+            food: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M6 3v7a3 3 0 0 0 6 0V3M9 10v11M17 3v18M14 8c0-3 3-5 3-5v18"/></svg>',
+            transport:
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="3" y="9" width="18" height="8" rx="2"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="16.5" cy="18.5" r="1.5"/></svg>',
+            utility:
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M12 3 4 11h4v10h8V11h4z"/></svg>',
+            cafe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M4 8h13a3 3 0 0 1 0 6h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8"/></svg>',
+            transfer:
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M4 8h13M13 4l4 4-4 4M20 16H7m4 4-4-4 4-4"/></svg>',
+          };
+          return icons[cat] || "";
+        }
+
+        function renderDonut() {
+          const total = spendCategories.reduce((s, c) => s + c.amount, 0);
+          let acc = 0;
+          const stops = spendCategories
+            .map((c) => {
+              const meta = CATEGORY_META[c.key];
+              const start = (acc / total) * 360;
+              acc += c.amount;
+              const end = (acc / total) * 360;
+              return `${meta.color} ${start}deg ${end}deg`;
+            })
+            .join(", ");
+          document.getElementById("spend-donut").style.background =
+            `conic-gradient(${stops})`;
+          document.getElementById("spend-total").textContent = money(total);
+
+          document.getElementById("spend-legend").innerHTML = spendCategories
+            .map((c) => {
+              const meta = CATEGORY_META[c.key];
+              return `<li><span class="legend-dot" style="background:${meta.color}"></span>${meta.label}<span class="legend-val">${money(c.amount)}</span></li>`;
+            })
+            .join("");
+        }
+
+        function renderGoal() {
+          const pct = Math.round((goal.current / goal.target) * 100);
+          document.getElementById("goal-fill").style.width = pct + "%";
+          document.getElementById("goal-current").textContent =
+            money(goal.current) + " из " + money(goal.target);
+          document.getElementById("goal-percent").textContent = pct + "%";
+        }
+
+        function renderAll() {
+          renderTabs();
+          renderHero();
+          renderLedger();
+          renderDonut();
+          renderGoal();
+        }
+
+        /* ============ DATE ============ */
+        document.getElementById("today-date").textContent =
+          new Intl.DateTimeFormat("ru-RU", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+          }).format(new Date());
+
+        /* ============ EVENTS: accounts & filters ============ */
+        document
+          .getElementById("account-tabs")
+          .addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-account]");
+            if (!btn) return;
+            state.accountId = btn.dataset.account;
+            renderTabs();
+            renderHero();
+            renderLedger();
+          });
+
+        document
+          .getElementById("filter-chips")
+          .addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-filter]");
+            if (!btn) return;
+            state.filter = btn.dataset.filter;
+            document
+              .querySelectorAll("#filter-chips .chip")
+              .forEach((c) => c.classList.toggle("active", c === btn));
+            renderLedger();
+          });
+
+        document.getElementById("tx-search").addEventListener("input", (e) => {
+          state.search = e.target.value.trim().toLowerCase();
+          renderLedger();
+        });
+
+        /* ============ NAVIGATION ============ */
+        const views = document.querySelectorAll(".view");
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.addEventListener("click", () => {
+            document
+              .querySelectorAll(".nav-link")
+              .forEach((l) => l.classList.remove("active"));
+            link.classList.add("active");
+            const target = link.dataset.view;
+            views.forEach((v) =>
+              v.classList.toggle("active", v.id === "view-" + target),
+            );
+            if (target === "placeholder") {
+              document.getElementById("ph-title").textContent =
+                link.dataset.title;
+              document.getElementById("ph-text").textContent =
+                link.dataset.text;
+            }
+          });
+        });
+        document.querySelector("[data-back]").addEventListener("click", () => {
+          document.querySelector('.nav-link[data-view="overview"]').click();
+        });
+
+        /* ============ MODAL / TRANSFER ============ */
+        const overlay = document.getElementById("modal-overlay");
+        const form = document.getElementById("transfer-form");
+        const successNote = document.getElementById("tf-success");
+
+        function openModal() {
+          overlay.hidden = false;
+          form.reset();
+          successNote.hidden = true;
+          document.getElementById("tf-recipient").focus();
+        }
+        function closeModal() {
+          overlay.hidden = true;
+        }
+
+        document
+          .getElementById("btn-new-transfer")
+          .addEventListener("click", openModal);
+        document.querySelectorAll(".qa-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            if (btn.dataset.action === "transfer") openModal();
+          });
+        });
+        document
+          .getElementById("modal-close")
+          .addEventListener("click", closeModal);
+        document
+          .getElementById("modal-cancel")
+          .addEventListener("click", closeModal);
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) closeModal();
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && !overlay.hidden) closeModal();
+        });
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const amount = parseFloat(
+            document.getElementById("tf-amount").value || "0",
+          );
+          const recipient = document
+            .getElementById("tf-recipient")
+            .value.trim();
+          if (amount <= 0 || !recipient) return;
+
+          const acc = currentAccount();
+          acc.balance -= amount;
+          acc.transactions.unshift({
+            id: Date.now(),
+            date: "сегодня",
+            title: "Перевод — " + recipient,
+            category: "transfer",
+            amount: -amount,
+            balanceAfter: acc.balance,
+          });
+          renderHero();
+          renderLedger();
+          successNote.hidden = false;
+          setTimeout(closeModal, 1200);
+        });
+
+        /* ============ INIT ============ */
+        renderAll();
+      })();
+    </script>
+  </body>
+</html>
